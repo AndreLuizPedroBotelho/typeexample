@@ -4,7 +4,8 @@
   "main": "index.js",
   "author": "André Luiz Pedro Botelho <andrepedrobotelho@gmail.com>",
   "scripts": {
-    "dev": "nodemon --watch \"src/\" --exec \"ts-node src/server.ts\" -e ts"
+    "dev": "nodemon --watch \"src/\" --exec \"ts-node src/server.ts\" -e ts",
+    "docs": "typedoc --out docs src  && npx http-server docs/. -p 4060 -a localhost"
   },
   "license": "MIT",
   "dependencies": {
@@ -27,8 +28,10 @@
     "pg-hstore": "^2.3.3",
     "sequelize": "^5.18.2",
     "sequelize-cli-typescript": "^3.2.0-c",
-    "swagger-ui-express": "^4.0.7",
     "ts-node": "^8.3.0",
     "typescript": "^3.6.2"
+  },
+  "devDependencies": {
+    "typedoc": "^0.15.6"
   }
 }

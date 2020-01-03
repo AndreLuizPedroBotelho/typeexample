@@ -23,6 +23,16 @@ export interface UserInterface {
   updatedAt: Date;
 }
 
+export interface UserSaveInterface {
+  name: string;
+  email: string;
+  password: string;
+}
+export interface AuthInterface {
+  email: string;
+  password: string;
+}
+
 User.init(
   {
     id: {

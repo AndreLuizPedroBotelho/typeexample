@@ -1,15 +1,25 @@
-import { Request, Response, NextFunction } from "express";
+import { AuthInterface } from './../models/user.model';
+import * as express from 'express';
 import { User, UserInterface } from "../models/user.model";
 import { FindOptions } from "sequelize";
 import bcrypt from "bcryptjs";
 import "../config/env";
 import jwt from "jsonwebtoken";
+import { Body, Delete, Request, Response, Example, Get, Patch, Post, Route } from 'tsoa';
 
 export class AuthController {
 
-  public async login(req: Request, res: Response, next: NextFunction) {
+  /**
+   * @method POST
+   * @params JSON [[AuthInterface]]
+   * @route /login
+   * @acces public
+   * @async
+   */
+  public async login(@Body() req: express.Request, @Response('') res: express.Response, next: express.NextFunction) {
     try {
-      const { password, email }: UserInterface = req.body;
+
+      const { password, email }: AuthInterface = req.body;
 
       const options: FindOptions = {
         where: { email: email }

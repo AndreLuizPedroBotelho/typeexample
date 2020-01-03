@@ -5,6 +5,12 @@ import bcrypt from "bcryptjs";
 import { check, validationResult } from 'express-validator';
 
 export class UserController {
+  /**
+   * @method GET
+   * @route /users
+   * @acces private
+   * @async
+   */
   public async index(req: Request, res: Response) {
     try {
       const user: Array<User> = await User.findAll<User>({
@@ -19,6 +25,13 @@ export class UserController {
     }
   }
 
+  /**
+   * @method POST
+   * @params [[UserSaveInterface]]: JSON
+   * @route /users
+   * @acces public
+   * @async
+   */
   public async create(req: Request, res: Response) {
 
     try {
@@ -40,6 +53,12 @@ export class UserController {
     }
   }
 
+  /**
+   * @method GET
+   * @argsPath id: Number 
+   * @route /users/:id
+   * @acces private
+   */
   public async show(req: Request, res: Response) {
     try {
       const userId: number = parseInt(req.params.id);
@@ -56,6 +75,12 @@ export class UserController {
 
   }
 
+  /**
+   * @method PUT
+   * @params [[UserSaveInterface]]: JSON
+   * @route /users
+   * @acces private
+   */
   public async update(req: Request, res: Response) {
     try {
       const userId: number = parseInt(req.params.id);
@@ -87,6 +112,12 @@ export class UserController {
 
   }
 
+  /**
+   * @method DELETE
+   * @argsPath id: Number 
+   * @route /users/:id
+   * @acces private
+   */
   public async delete(req: Request, res: Response) {
     try {
       const userId: number = parseInt(req.params.id);
