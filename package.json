@@ -7,6 +7,12 @@
     "dev": "nodemon --watch \"src/\" --exec \"ts-node src/server.ts\" -e ts",
     "docs": "typedoc --out docs src  && npx http-server docs/. -p 4060 -a localhost"
   },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
+    }
+  },
   "license": "MIT",
   "dependencies": {
     "@types/bluebird": "^3.5.27",
@@ -32,6 +38,16 @@
     "typescript": "^3.6.2"
   },
   "devDependencies": {
+    "@commitlint/cli": "^8.3.4",
+    "@commitlint/config-conventional": "^8.3.4",
+    "commitizen": "^4.0.3",
+    "cz-conventional-changelog": "3.0.2",
+    "husky": "^3.1.0",
     "typedoc": "^0.15.6"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
