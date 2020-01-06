@@ -28,6 +28,7 @@ $ yarn
 $ cp .env-example .env-2 
 ```` 
 ## 3. Edit the .env file with the correct information
+
 ## 4. Execute the project
 ````
 $ yarn dev 
