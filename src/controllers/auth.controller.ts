@@ -14,7 +14,6 @@ export class AuthController {
    * @acces public
    * @async
    */
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   public async login(req: express.Request, res: express.Response,
     next: express.NextFunction) {
     try {
@@ -26,11 +25,13 @@ export class AuthController {
 
       const user: User = await User.findOne<User>(options);
 
-      if (!bcrypt.compareSync(password, user.passwordHash)) {
+      if (!user || !bcrypt.compareSync(password, user.passwordHash)) {
         res.status(401).json({ data: 'User not found' });
         return;
       }
-      // Sing JWT, valid for 1 hour
+      /**
+       * Sing JWT, valid for 1 hour
+       */
       const token = jwt.sign(
         { id: user.id, email: user.email },
         process.env.JWT_SECRET,

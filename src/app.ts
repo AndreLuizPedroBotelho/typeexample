@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import helmet from 'helmet';
 import { Routes } from './config/routes';
-import { sequelizeInit } from './config/database';
+import { databaseGenerate } from './config/database';
 
 class App {
   public app: express.Application;
@@ -22,7 +22,7 @@ class App {
     this.app.use(cors());
     this.app.use(helmet());
     this.app.use(bodyParser());
-    sequelizeInit();
+    databaseGenerate();
   }
 }
 

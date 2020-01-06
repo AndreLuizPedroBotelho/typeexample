@@ -11,7 +11,7 @@ export const database = new Sequelize({
   dialect: 'postgres',
 });
 
-export const sequelizeInit = () => {
+export const databaseGenerate = () => {
   try {
     const pool = new Pool({
       database: 'postgres',
@@ -22,7 +22,7 @@ export const sequelizeInit = () => {
     });
 
     pool.query(`CREATE DATABASE IF NOT EXITS ${process.env.DB_NAME}`, (err, res) => {
-      database.sync({ force: true }).then(() => {
+      database.sync().then(() => {
         console.log('Create Database');
       });
       pool.end();

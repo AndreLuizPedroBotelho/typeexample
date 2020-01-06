@@ -12,14 +12,14 @@ export class UserController {
    * @acces private
    * @async
    */
-  public async index(res: Response) {
+  public async index(_req: Request, res: Response) {
     try {
       const user: Array<User> = await User.findAll<User>({
         attributes: {
           exclude: ['passwordHash'],
         },
       });
-      res.json(user);
+      res.status(200).json(user);
     } catch (err) {
       res.status(500).json(err);
     }
@@ -104,9 +104,9 @@ export class UserController {
         res.status(202).json({ data: 'User update with success' });
       }
 
-      res.status(404).json({ errors: ['User not found'] });
+      return res.status(404).json({ errors: ['User not found'] });
     } catch (err) {
-      res.status(500).json(err);
+      return res.status(500).json(err);
     }
   }
 
@@ -128,13 +128,11 @@ export class UserController {
       const user = await User.destroy(options);
 
       if (user) {
-        res.status(202).json({ data: 'User delete with success' });
-        return;
+        return res.status(202).json({ data: 'User delete with success' });
       }
-      res.status(404).json({ errors: ['User not found'] });
-      return;
+      return res.status(404).json({ errors: ['User not found'] });
     } catch (err) {
-      res.status(500).json(err);
+      return res.status(500).json(err);
     }
   }
 }

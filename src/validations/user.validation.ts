@@ -1,5 +1,7 @@
 import { check } from 'express-validator';
+import { Op } from 'sequelize';
 import { User } from '../models/user.model';
+
 
 export class UserValidation {
   public validation = [
@@ -7,11 +9,16 @@ export class UserValidation {
     check('name', 'Invalid name').optional().isString(),
     check('email', 'Email must be less than 255 characters').optional().isLength({ max: 128 }),
     check('email', 'Invalid email').optional().isEmail(),
-    check('email', 'User with this email already exists').optional().custom((value) => new Promise((resolve, reject) => {
+    check('email', 'User with this email already exists').optional().custom((value, { req }) => new Promise((resolve, reject) => {
       if (typeof value === 'string') {
+        const id = req.params.id || 0;
+        console.log(id);
         User.findOne({
           where: {
             email: value,
+            id: {
+              [Op.not]: [id],
+            },
           },
         }).then((user: User) => ((user) ? reject() : resolve()));
       } else {
