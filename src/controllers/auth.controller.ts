@@ -14,8 +14,7 @@ export class AuthController {
    * @acces public
    * @async
    */
-  public async login(req: express.Request, res: express.Response,
-    next: express.NextFunction) {
+  public async login(req: express.Request, res: express.Response, next: express.NextFunction) {
     try {
       const { password, email }: AuthInterface = req.body;
 

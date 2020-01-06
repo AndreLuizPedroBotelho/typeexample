@@ -1,0 +1,10 @@
+{
+  "execMap": {
+    "js": "node -r ts-node/register"
+  },
+  "watch": [
+    "src/",
+    ".env"
+  ],
+  "ext": "ts, css"
+}
