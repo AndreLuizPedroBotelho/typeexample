@@ -12,7 +12,6 @@ export class UserValidation {
     check('email', 'User with this email already exists').optional().custom((value, { req }) => new Promise((resolve, reject) => {
       if (typeof value === 'string') {
         const id = req.params.id || 0;
-        console.log(id);
         User.findOne({
           where: {
             email: value,
