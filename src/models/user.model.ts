@@ -1,15 +1,20 @@
-import { Model, DataTypes } from "sequelize";
-import { database } from "../config/database";
-import bcrypt from "bcryptjs";
-
+import { Model, DataTypes } from 'sequelize';
+import bcrypt from 'bcryptjs';
+import { database } from '../config/database';
 
 export class User extends Model {
   public id: number;
+
   public name: string;
+
   public email: string;
+
   public password: string;
+
   public passwordHash: string;
+
   public readonly createdAt: Date;
+
   public readonly updatedAt: Date;
 }
 
@@ -39,7 +44,7 @@ User.init(
       type: DataTypes.BIGINT,
       autoIncrement: true,
       field: 'id',
-      primaryKey: true
+      primaryKey: true,
     },
     name: {
       type: new DataTypes.STRING(255),
@@ -64,10 +69,10 @@ User.init(
     },
   },
   {
-    tableName: "users",
+    tableName: 'users',
     sequelize: database,
     freezeTableName: true,
-  }
+  },
 );
 
 User.addHook('beforeSave', async (user: User) => {
@@ -75,4 +80,3 @@ User.addHook('beforeSave', async (user: User) => {
     user.passwordHash = await bcrypt.hash(user.password, 8);
   }
 });
-
