@@ -20,7 +20,7 @@
     "@types/node": "^12.7.4",
     "@types/sequelize": "^4.28.4",
     "@types/validator": "^10.11.3",
-    "bcrypt": "^3.0.7",
+    "bcrypt": "^5.0.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
